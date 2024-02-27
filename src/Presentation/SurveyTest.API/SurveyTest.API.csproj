@@ -15,4 +15,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\SurveyTest.Application\SurveyTest.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\SurveyTest.DAL\SurveyTest.DAL.csproj" />
+  </ItemGroup>
+
 </Project>
