@@ -18,4 +18,8 @@
     <ProjectReference Include="..\SurveyTest.Domain\SurveyTest.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validation\Validators\" />
+  </ItemGroup>
+
 </Project>
