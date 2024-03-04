@@ -11,6 +11,10 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
+        // Adding MediatR
+        services.AddMediatR(config => 
+            config.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
         // Adding assembly AutoMapper profile
         services.AddAutoMapper(config =>
             config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly())));
