@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SurveyTest.Application.Features.Queries;
 using SurveyTest.Application.Features.Surveys.Commands;
 using SurveyTest.Application.Features.Surveys.Dto;
 using SurveyTest.Application.Features.Surveys.Queries;
@@ -49,11 +50,13 @@ public class SurveyController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet("questions/{questionId}")]
-    public async Task<ActionResult> GetQuestionInfo(
-        Guid questionId, CancellationToken cancellationToken)
-    
+    [HttpGet("{surveyId}")]
+    public async Task<ActionResult<SurveyDto>> GetSurveyById(
+        Guid surveyId, CancellationToken cancellationToken)
     {
-        
+        var query = new GetSurveyQuery(surveyId);
+        var response = await _mediator.Send(query, cancellationToken);
+
+        return response;
     }
 }

@@ -15,13 +15,14 @@ public class SurveyDto : IMapping
     public void CreateMap(Profile profile)
     {
         profile.CreateMap<Survey, SurveyDto>()
-            .ForMember(dest => dest.AuthorId, 
+            .ForMember(dest => dest.AuthorId,
                 opt => opt.MapFrom(src => src.AuthorUserId));
     }
 }
 
 public class QuestionDto : IMapping
 {
+    public Guid Id { get; set; }
     public string Text { get; set; }
 
     public void CreateMap(Profile profile)
