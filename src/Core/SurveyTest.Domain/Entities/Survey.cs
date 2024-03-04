@@ -10,4 +10,6 @@ public class Survey
 
     public ICollection<Question> Questions { get; set; }
     public ICollection<Interview> Interviews { get; set; }
+
+    public DateTime CreationDate { get; set; }
 }

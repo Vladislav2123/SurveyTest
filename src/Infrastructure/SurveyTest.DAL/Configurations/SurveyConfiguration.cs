@@ -12,6 +12,10 @@ public class SurveyConfiguration : IEntityTypeConfiguration<Survey>
             .HasKey(survey => survey.Id);
 
         builder
+            .Property(survey => survey.CreationDate)
+            .IsRequired();
+
+        builder
             .Property(survey => survey.Title)
             .HasMaxLength(100)
             .IsRequired();

@@ -12,6 +12,10 @@ public class InterviewConfiguration : IEntityTypeConfiguration<Interview>
             .HasKey(interview => interview.Id);
 
         builder
+            .Property(interview => interview.StartDate)
+            .IsRequired();
+
+        builder
             .HasOne(interview => interview.User)
             .WithMany(user => user.Interviews)
             .HasForeignKey(interview => interview.UserId)
@@ -28,5 +32,6 @@ public class InterviewConfiguration : IEntityTypeConfiguration<Interview>
             .WithOne(result => result.Interview)
             .HasForeignKey(result => result.InterviewId)
             .IsRequired();
+
     }
 }

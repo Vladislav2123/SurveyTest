@@ -11,4 +11,6 @@ public class Interview
     public Guid SurveyId { get; set; }
 
     public ICollection<Result> Results { get; set; }
+
+    public DateTime StartDate { get; set; }
 }
