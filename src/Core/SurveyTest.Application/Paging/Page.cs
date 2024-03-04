@@ -10,6 +10,9 @@ public struct Page
     public int number;
     public int size;
 
+    public int Skip => (number - 1) * size;
+    public int Take => size;
+
     public Page(int number, int size)
     {
         if (number == 0) number = DefaultNumber;
