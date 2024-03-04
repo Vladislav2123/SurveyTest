@@ -6,7 +6,7 @@ using SurveyTest.Application.Features.Surveys.Dto;
 using SurveyTest.Domain;
 using SurveyTest.Domain.Entities;
 
-namespace SurveyTest.Application.Features.Queries;
+namespace SurveyTest.Application.Features.Surveys.Queries;
 
 public record GetSurveyQuery(Guid Id)
     : IRequest<SurveyDto>;

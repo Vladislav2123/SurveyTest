@@ -10,6 +10,12 @@ public class InterviewConfiguration : IEntityTypeConfiguration<Interview>
     {
         builder
             .HasKey(interview => interview.Id);
+        
+        builder
+            .HasIndex(interview => interview.UserId);
+
+        builder
+            .HasIndex(interview => interview.SurveyId);
 
         builder
             .Property(interview => interview.StartDate)
