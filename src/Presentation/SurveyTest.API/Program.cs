@@ -1,3 +1,4 @@
+using SurveyTest.API.ExceptionsHandling;
 using SurveyTest.Application;
 using SurveyTest.Application.Abstraction;
 using SurveyTest.DAL;
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services
+    .AddTransient<GlobalExceptionsHandlingMiddleware>()
     .AddDal(builder.Configuration)
     .AddApplication();
 
@@ -20,10 +22,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseGlobalExceptionsHandling();
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 InitializeDb();

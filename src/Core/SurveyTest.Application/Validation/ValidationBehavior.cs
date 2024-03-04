@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using FluentValidation;
+using ValidationException = SurveyTest.Domain.Exceptions.ValidationException;
 
 namespace SurveyTest.Application.Validation;
 
@@ -19,14 +20,25 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
 
         var context = new ValidationContext<TRequest>(request);
 
+        // Handling all current request validators and adding adding errors to dictionary
         var failuresDictionary = _validators
             .Select(validator => validator.Validate(context))
             .SelectMany(result => result.Errors)
-            .Where(failure => failure != null);
+            .Where(failure => failure != null)
+            .GroupBy(
+            failure => failure.PropertyName,
+            failure => failure.ErrorMessage,
+            (propertyName, errorMessages) => new
+            {
+                Key = propertyName,
+                Values = errorMessages.Distinct().ToArray()
+            })
+            .ToDictionary(x => x.Key, x => x.Values);
 
+        // Throwing exception if there is any validaiton failures
         if (failuresDictionary.Any())
         {
-            throw new ValidationException($"{request.GetType().Name} validation error", failuresDictionary);
+            throw new ValidationException(request.GetType().Name, failuresDictionary);
         }
 
         return await next();
