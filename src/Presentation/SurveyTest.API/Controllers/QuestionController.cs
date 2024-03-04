@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SurveyTest.Application.Features.Queries;
+using SurveyTest.Application.Features.Questions.Queries;
 using SurveyTest.Application.Features.Questions.Dto;
 
 namespace SurveyTest.API.Controllers;

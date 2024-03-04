@@ -1,4 +1,4 @@
-﻿namespace SurveyTest.Domain;
+﻿namespace SurveyTest.Domain.Exceptions;
 
 public class EntityNotFoundException : Exception
 {

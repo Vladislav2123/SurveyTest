@@ -4,9 +4,9 @@ using SurveyTest.Application.Abstraction;
 using SurveyTest.Application.Features.Questions.Dto;
 using SurveyTest.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using SurveyTest.Domain;
+using SurveyTest.Domain.Exceptions;
 
-namespace SurveyTest.Application.Features.Queries;
+namespace SurveyTest.Application.Features.Questions.Queries;
 
 public record GetQuestionQuery(Guid Id)
     : IRequest<QuestionDto>;
