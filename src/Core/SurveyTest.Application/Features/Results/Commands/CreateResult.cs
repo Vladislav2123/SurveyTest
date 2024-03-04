@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SurveyTest.Application.Abstraction;
 using SurveyTest.Application.Features.Interviews.Queries;
-using SurveyTest.Domain;
 using SurveyTest.Domain.Entities;
 using SurveyTest.Domain.Exceptions;
 

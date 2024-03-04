@@ -34,7 +34,8 @@ public class GetOrCreateInterviewHandler : IRequestHandler<GetOrCreateInterviewQ
                 Id = Guid.NewGuid(),
                 UserId = request.UserId,
                 SurveyId = request.SurveyId,
-                StartDate = DateTime.UtcNow
+                StartDate = DateTime.UtcNow,
+                Results = new List<Result>()
             };
 
             _dbContext.Interviews.AddAsync(interview, cancellationToken);
