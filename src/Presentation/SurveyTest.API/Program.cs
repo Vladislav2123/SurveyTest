@@ -1,4 +1,5 @@
 using SurveyTest.Application;
+using SurveyTest.Application.Abstraction;
 using SurveyTest.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,4 +26,17 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+InitializeDb();
+
 app.Run();
+
+void InitializeDb()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider
+            .GetService<IApplicationDbContext>();
+
+        DbInitializer.Initialize(dbContext);
+    }
+}

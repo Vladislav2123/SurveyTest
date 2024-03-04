@@ -8,15 +8,15 @@ namespace SurveyTest.DAL;
 
 public class ApplicationDbContext : DbContext, IApplicationDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : 
-        base(options) {}
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options) { }
 
-    public DbSet<User> Users { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public DbSet<Survey> Surveys { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public DbSet<Question> Questions { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public DbSet<Answer> Answers { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public DbSet<Result> Result { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-    public DbSet<Interview> Interviews { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Survey> Surveys { get; set; }
+    public DbSet<Question> Questions { get; set; }
+    public DbSet<Answer> Answers { get; set; }
+    public DbSet<Result> Result { get; set; }
+    public DbSet<Interview> Interviews { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,5 +26,10 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
         modelBuilder.ApplyConfiguration(new AnswerConfiguration());
         modelBuilder.ApplyConfiguration(new InterviewConfiguration());
         modelBuilder.ApplyConfiguration(new ResultConfiguration());
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSnakeCaseNamingConvention();
     }
 }
