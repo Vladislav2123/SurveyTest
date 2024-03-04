@@ -17,7 +17,7 @@ public class ResultController : ControllerBase
 
     [HttpPost]
     public async Task<ActionResult> SaveResult(
-        CreateResultCommand command, CancellationToken cancellationToken)
+        [FromForm] CreateResultCommand command, CancellationToken cancellationToken)
     {
         await _mediator.Send(command, cancellationToken);
 
