@@ -1,6 +1,4 @@
-﻿using SurveyTest.Domain.Entities;
-
-namespace SurveyTest.Domain;
+﻿namespace SurveyTest.Domain.Entities;
 
 public class User
 {

@@ -1,6 +1,6 @@
 ﻿using SurveyTest.Application.Abstraction;
 using MediatR;
-using SurveyTest.Domain;
+using SurveyTest.Domain.Entities;
 using AutoMapper;
 using FluentValidation;
 using SurveyTest.Application.Features.Users.Dto;

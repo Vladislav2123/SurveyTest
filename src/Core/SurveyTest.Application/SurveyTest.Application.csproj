@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="Features\Results\Dto\" />
-    <Folder Include="Features\Results\Interview\" />
     <Folder Include="Validation\Validators\" />
   </ItemGroup>
 

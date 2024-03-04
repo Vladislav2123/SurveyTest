@@ -15,7 +15,7 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     public DbSet<Survey> Surveys { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<Answer> Answers { get; set; }
-    public DbSet<Result> Result { get; set; }
+    public DbSet<Result> Results { get; set; }
     public DbSet<Interview> Interviews { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SurveyTest.Application.Abstraction;
 using SurveyTest.Application.Features.Surveys.Dto;
-using SurveyTest.Domain;
+using SurveyTest.Domain.Exceptions;
 using SurveyTest.Domain.Entities;
 
 

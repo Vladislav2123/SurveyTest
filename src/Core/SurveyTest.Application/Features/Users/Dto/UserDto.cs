@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SurveyTest.Application.Mapping;
-using SurveyTest.Domain;
+using SurveyTest.Domain.Entities;
 
 namespace SurveyTest.Application.Features.Users.Dto;
 

@@ -81,7 +81,7 @@ public class CreateResultHandler : IRequestHandler<CreateResultCommand, Unit>
             AnswerId = request.AnswerId
         };
 
-        _dbContext.Result.AddAsync(result, cancellationToken);
+        _dbContext.Results.AddAsync(result, cancellationToken);
         _dbContext.SaveChangesAsync(cancellationToken);
 
         return Unit.Value;
