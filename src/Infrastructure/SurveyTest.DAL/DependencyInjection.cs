@@ -9,6 +9,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddDal(this IServiceCollection services, IConfiguration config)
     {
+        Console.WriteLine($"Connection string: {config.GetConnectionString("PostgreSQL")}");
+
         services.AddDbContext<ApplicationDbContext>(options => 
             options.UseNpgsql(config.GetConnectionString("PostgreSQL")));
 

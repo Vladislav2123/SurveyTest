@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: survey_test_api
+    ports:
+      - 5000:5000
+      - 5001:5001
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:5000
+    volumes:
+      - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
+    networks:
+      - test_net
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres
+    container_name: survey_test_postgres
+    environment:
+      POSTGRES_DB: SurveysTest
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: StrongPassword
+    ports:
+      - 5432:5432
+    networks:
+      - test_net
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      start_period: 10s
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+networks:
+  test_net:
+    name: test_net
