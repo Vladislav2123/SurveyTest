@@ -53,11 +53,11 @@ public class GetAllSurveysHandler: IRequestHandler<GetAllSurveysQuery, PagedList
         else surveysQuery = surveysQuery.OrderByDescending(sortColumnExpression);
 
         // Paging
-        var totalAmount = surveysQuery.Count();
-        var surveys = surveysQuery
+        var totalAmount = await surveysQuery.CountAsync(cancellationToken);
+        var surveys = await surveysQuery
             .Skip(request.Page.Skip)
             .Take(request.Page.Take)
-            .ToList();
+            .ToListAsync(cancellationToken);
 
         // Response
         var mappedProducts = _mapper.Map<List<SurveyLookupDto>>(surveys);

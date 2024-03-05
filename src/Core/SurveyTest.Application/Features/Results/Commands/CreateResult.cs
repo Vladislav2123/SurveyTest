@@ -48,19 +48,19 @@ public class CreateResultHandler : IRequestHandler<CreateResultCommand, Unit>
     {
         // Checking that all entities exist
         if (await _dbContext.Users
-            .AnyAsync(user => user.Id == request.UserId) == false)
+            .AnyAsync(user => user.Id == request.UserId, cancellationToken) == false)
             throw new EntityNotFoundException(nameof(User), request.UserId);
 
         if (await _dbContext.Surveys
-            .AnyAsync(survey => survey.Id == request.SurveyId) == false)
+            .AnyAsync(survey => survey.Id == request.SurveyId, cancellationToken) == false)
             throw new EntityNotFoundException(nameof(Survey), request.SurveyId);
 
         if (await _dbContext.Questions
-            .AnyAsync(question => question.Id == request.QuestionId) == false)
+            .AnyAsync(question => question.Id == request.QuestionId, cancellationToken) == false)
             throw new EntityNotFoundException(nameof(Question), request.QuestionId);
 
         if (await _dbContext.Answers
-            .AnyAsync(answer => answer.Id == request.AnswerId) == false)
+            .AnyAsync(answer => answer.Id == request.AnswerId, cancellationToken) == false)
             throw new EntityNotFoundException(nameof(Answer), request.AnswerId);
 
         // Getting interview

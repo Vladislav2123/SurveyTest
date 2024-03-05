@@ -29,7 +29,7 @@ public class GetInterviewHandler : IRequestHandler<GetInterviewQuery, InterviewD
             .Include(interview => interview.Survey)
             .Include(interview => interview.Results).ThenInclude(result => result.Question)
             .Include(interview => interview.Results).ThenInclude(interview => interview.Answer)
-            .FirstOrDefaultAsync(interview => interview.Id == request.Id);
+            .FirstOrDefaultAsync(interview => interview.Id == request.Id, cancellationToken);
 
         if (interview == null) throw new EntityNotFoundException(nameof(Interview), request.Id);
 

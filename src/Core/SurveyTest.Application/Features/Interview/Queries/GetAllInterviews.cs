@@ -24,7 +24,7 @@ public class GetAllInterviewsHandler : IRequestHandler<GetAllInterviewsQuery, Pa
         _mapper = mapper;
     }
 
-    public Task<PagedList<InterviewLookupDto>> Handle(GetAllInterviewsQuery request, CancellationToken cancellationToken)
+    public async Task<PagedList<InterviewLookupDto>> Handle(GetAllInterviewsQuery request, CancellationToken cancellationToken)
     {
         var interviewsQuery = _dbContext.Interviews
             .Include(interview => interview.User)
@@ -36,14 +36,14 @@ public class GetAllInterviewsHandler : IRequestHandler<GetAllInterviewsQuery, Pa
         else if (request.UserId != null)
             interviewsQuery = interviewsQuery.Where(interview => interview.UserId == request.UserId);
 
-        var totalAmount = interviewsQuery.Count();
-        var interviews = interviewsQuery
+        var totalAmount = await interviewsQuery.CountAsync(cancellationToken);
+        var interviews = await interviewsQuery
             .Take(request.Page.Take)
             .Skip(request.Page.Skip)
-            .ToList();
+            .ToListAsync(cancellationToken);
 
         var mappedInterviews = _mapper.Map<List<InterviewLookupDto>>(interviews);
-        return Task.FromResult(new PagedList<InterviewLookupDto>(mappedInterviews, totalAmount, request.Page));
+        return new PagedList<InterviewLookupDto>(mappedInterviews, totalAmount, request.Page);
     }
 }
 

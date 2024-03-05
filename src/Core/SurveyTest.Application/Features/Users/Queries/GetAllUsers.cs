@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SurveyTest.Application.Abstraction;
 using SurveyTest.Application.Features.Users.Dto;
 using SurveyTest.Application.Paging;
@@ -22,7 +23,7 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, PagedList<Us
         _mapper = mapper;
     }
 
-    public Task<PagedList<UserDto>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
+    public async Task<PagedList<UserDto>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
         var usersQuery = _dbContext.Users.AsQueryable();
 
@@ -31,13 +32,13 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, PagedList<Us
             usersQuery = usersQuery.Where(user => user.Name.Contains(request.SearchTerms));
         }
 
-        var totalAmount = usersQuery.Count();
-        var usersList = usersQuery
+        var totalAmount = await usersQuery.CountAsync(cancellationToken);
+        var usersList = await usersQuery
             .Skip(request.page.Skip)
             .Take(request.page.size)
-            .ToList();
+            .ToListAsync(cancellationToken);
 
         var mappedUsers = _mapper.Map<List<UserDto>>(usersList);
-        return Task.FromResult(new PagedList<UserDto>(mappedUsers, totalAmount, request.page));
+        return new PagedList<UserDto>(mappedUsers, totalAmount, request.page);
     }
 }
